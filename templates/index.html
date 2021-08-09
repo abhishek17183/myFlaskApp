@@ -1,0 +1,80 @@
+ 
+        {% extends 'base.html' %}
+        {% block title %}
+            iNotes-By-Abhi
+        {% endblock title %}
+        {% block body %}
+        
+
+    <div class="container my-3">
+        <h2>
+            Add Your Notes
+        </h2>
+    </div>
+    <div class="container my-4">
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Note Title</label>
+                <input name="title" required type="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Note Description</label>
+                <textarea name="description" required class="form-control" id="exampleFormControlTextarea1"
+                    rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-success">Add Note</button>
+        </form>
+    </div>
+
+    <div class="container my-3">
+        <h3 class="mb-3">Your Notes</h3>
+        <table class="table">
+            <thead>
+                {% if allNotes|length > 0 %}
+                <tr>
+                    <th scope="col">
+                        <h4>Sno</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Title</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Description</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Date</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Actions</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for allNotes in allNotes %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td><p class="my-2">{{allNotes.title}}</p></td>
+                    <td><p class="my-2">{{allNotes.notes}}</p></td>
+                    <td><p class="my-2">{{allNotes.date}}</p></td>
+                    <td><a href="/update/{{allNotes.sno}}" type="button" class="btn my-2 btn-sm btn-outline-success mx-2">Update</a><a
+                            href="/delete/{{allNotes.sno}}" type="button" class="btn my-2 btn-sm btn-outline-success  mx-2">Delete</a></td>
+                </tr><p></p>
+
+                {% endfor %}
+        
+                {% else %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>No Records!</strong> Please add your notes.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+   
+       
+   {% endblock body  %}
